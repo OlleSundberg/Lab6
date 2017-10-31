@@ -7,8 +7,20 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="372.738" Width="877.436">
     <Grid>
-        <Label Content="Bartender" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Label Content="Waiter" HorizontalAlignment="Left" Margin="143,10,0,0" VerticalAlignment="Top" FontSize="18"/>
-        <Label Content="Patrons" HorizontalAlignment="Left" Margin="258,10,0,0" VerticalAlignment="Top" FontSize="18"/>
+        <Label Content="Bartender" HorizontalAlignment="Left" Margin="8,10,0,0" VerticalAlignment="Top" FontSize="18" Width="132" Height="37"/>
+        <Label Content="Waiter" HorizontalAlignment="Left" Margin="165,10,0,0" VerticalAlignment="Top" FontSize="18" Width="93" Height="37"/>
+        <Label Content="Patrons" HorizontalAlignment="Left" Margin="322,10,0,0" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.291,0.403" Width="105" Height="37"/>
+        <ListBox x:Name="lbxBartender" HorizontalAlignment="Left" Height="201" Margin="8,53,0,0" VerticalAlignment="Top" Width="149"/>
+        <ListBox x:Name="lbxWaiter" HorizontalAlignment="Left" Height="201" Margin="165,53,0,0" VerticalAlignment="Top" Width="150"/>
+        <ListBox x:Name="lbxPatrons" HorizontalAlignment="Left" Height="201" Margin="322,53,0,0" VerticalAlignment="Top" Width="150"/>
+        <Button x:Name="btnPauseBartender" Content="Pause/Continue" HorizontalAlignment="Left" Margin="8,259,0,0" VerticalAlignment="Top" Width="149" Height="22"/>
+        <Button x:Name="btnWaiterPause" Content="Pause/Continue" HorizontalAlignment="Left" Margin="165,259,0,0" VerticalAlignment="Top" Width="150" Height="22"/>
+        <Button x:Name="btnPausePatrons" Content="Pause/Continue" HorizontalAlignment="Left" Margin="322,259,0,0" VerticalAlignment="Top" Width="150" Height="22"/>
+        <Button x:Name="btnOpenBar" Content="Open/Close" HorizontalAlignment="Left" Margin="8,288,0,0" VerticalAlignment="Top" Width="464" Height="46"/>
+        <Button x:Name="btnPanic" Content="Panic! (stop all threads!!!)" HorizontalAlignment="Left" Margin="568,259,0,0" VerticalAlignment="Top" Width="165" Height="22"/>
+        <Label Content="Resources" HorizontalAlignment="Left" Margin="568,10,0,0" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.291,0.403" Width="105" Height="37"/>
+        <Label x:Name="lblNrOfGuests" Content="NrOfGuests" HorizontalAlignment="Left" Margin="568,55,0,0" VerticalAlignment="Top" Height="29" Width="72"/>
+        <Label x:Name="lblNrOfGlasses" Content="NrOfGlasses" HorizontalAlignment="Left" Margin="568,90,0,0" VerticalAlignment="Top" Height="28" Width="75"/>
+        <Label x:Name="lblNrOfTables" Content="NrOfTables" HorizontalAlignment="Left" Margin="568,124,0,0" VerticalAlignment="Top" Cursor="" Height="28" Width="70"/>
     </Grid>
 </Window>
