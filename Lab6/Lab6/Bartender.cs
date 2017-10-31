@@ -24,7 +24,7 @@ namespace Lab6
                 while (true /*Baren är öppen ELLER det finns gäster.*/)
                 {
                     Log("Waiting for a customer.");
-                    while (mw.BarQueue.TryDequeue(out CurrentCustomer)) { Thread.Sleep(1); }
+                    while (!mw.BarQueue.TryDequeue(out CurrentCustomer)) { Thread.Sleep(1); }
                 }
             });
         }
