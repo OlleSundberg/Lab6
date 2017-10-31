@@ -21,7 +21,7 @@ namespace Lab6
 {
     public class Glass
     {
-        public const int Total = 20;
+        public const int Total = 8;
     }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -32,11 +32,16 @@ namespace Lab6
         public double TimeScale = 1;
         public double BartenderTS = 1;
         public double WaiterTS = 1;
-        public double BoucnerTS = 1;
+        public double BouncerTS = 1;
+        public double PatronTS = 1;
 
-        public int Chairs = 3;
+        public int Groups = 1; //Mängd människor som kommer in i taget.
+
+        public int Chairs = 9;
         public int BouncerTimeMin = 3;
         public int BouncerTimeMax = 10;
+
+        int AutoClose = 120; //0 = disabled
 
         public bool Open = false;
 
@@ -47,6 +52,8 @@ namespace Lab6
         public ConcurrentQueue<Glass> TableGlasses = new ConcurrentQueue<Glass>();
         public List<Patron> Sitting = new List<Patron>();
         public ConcurrentStack<Glass> Shelf = new ConcurrentStack<Glass>();
+
+        Random rnd = new Random();
 
         Bartender bartender;
         Bouncer bouncer;
@@ -81,7 +88,7 @@ namespace Lab6
 
         public string GetName()
         {
-            return NameList.Names[new Random().Next(NameList.Names.Count)];
+            return NameList.Names[rnd.Next(NameList.Names.Count)];
         }
 
         private void btnOpenBar_Click(object sender, RoutedEventArgs e)
@@ -113,23 +120,26 @@ namespace Lab6
             });
         }
 
-        private void sldTimescale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            TimeScale = sldTimescale.Value;
-            if (lblTimescaleValue != null)
-                lblTimescaleValue.Content = TimeScale.ToString();
-        }
 
         void Timer()
         {
+            Stopwatch sw = new Stopwatch();
             int ElapsedTime = 0;
             while (true)
             {
                 if (Open)
                 {
-                    Thread.Sleep(Convert.ToInt32(995 / TimeScale));
+                    sw.Restart();
+                    while(sw.ElapsedMilliseconds < 1000 / TimeScale) { }
+
                     ElapsedTime++;
                     Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s)");
+
+                    if (AutoClose > 0 && ElapsedTime >= AutoClose)
+                    {
+                        Open = false;
+                        Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose})");
+                    }
                 }
             }
         }
@@ -163,6 +173,34 @@ namespace Lab6
                 lblWaiter.Content = "Waiter (on break)";
                 lblPatrons.Content = "Patrons (door closed)";
             });
+        }
+
+        private void sldTimescale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            TimeScale = sldTimescale.Value;
+            if (lblTimescaleValue != null)
+                lblTimescaleValue.Content = TimeScale.ToString();
+        }
+
+        private void sldBartenderTS_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            BartenderTS = sldBartenderTS.Value;
+            if (lblBartenderTSValue != null)
+                lblBartenderTSValue.Content = BartenderTS.ToString();
+        }
+
+        private void sldWaiterTS_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            WaiterTS = sldWaiterTS.Value;
+            if (lblWaiterTSValue != null)
+                lblWaiterTSValue.Content = WaiterTS.ToString();
+        }
+
+        private void sldPatronsTS_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            BouncerTS = sldPatronsTS.Value;
+            if (lblPatronsTSValue != null)
+                lblPatronsTSValue.Content = BouncerTS.ToString();
         }
     }
 }

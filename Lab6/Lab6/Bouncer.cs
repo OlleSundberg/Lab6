@@ -29,14 +29,15 @@ namespace Lab6
                     {
                         while (Paused) { Thread.Sleep(1); }
                         int delay = new Random().Next(mw.BouncerTimeMin, mw.BouncerTimeMax + 1);
-                        for (int n = 0; n < delay * 10 / mw.TimeScale; n++)
+                        for (int n = 0; n < delay * 10 / (mw.TimeScale * mw.BouncerTS); n++)
                         {
                             while(Paused) { Thread.Sleep(1); }
                             Thread.Sleep(100);
                         }
                         if (mw.Open)
                         {
-                            mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
+                            for (int n = 0; n < mw.Groups; n++)
+                                mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
                         }
                     }
                     Log("Bouncer is going home.");
@@ -44,6 +45,12 @@ namespace Lab6
                 });
             }
         }
-        void Log(string Message) => mw.Dispatcher.Invoke(()=>mw.lbxPatrons.Items.Insert(0,$"{mw.MessageID}: {Message}"));
+        void Log(string Message) => mw.Dispatcher.Invoke(()=>mw.lbxPatrons.Items.Insert(0,$"{mw.MessageID++}: {Message}"));
+
+        public void PartyBus(int Amount)
+        {
+            for (int n = 0; n < Amount; n++)
+                Task.Run(() => mw.BarQueue.Enqueue(new Patron(mw, mw.GetName())));
+        }
     }
 }

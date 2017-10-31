@@ -26,14 +26,14 @@
         <Label Content="Global timescale:" HorizontalAlignment="Left" Margin="724,326,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
         <Label x:Name="lblTimescaleValue" Content="1" HorizontalAlignment="Left" Margin="816,326,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblSatisfied" Content="Satisfied customers: 0" HorizontalAlignment="Left" Margin="693,202,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Slider x:Name="sldTimescale_Copy" HorizontalAlignment="Left" Margin="31,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" ValueChanged="sldTimescale_ValueChanged" TickFrequency="0.1" Value="1"/>
+        <Slider x:Name="sldBartenderTS" HorizontalAlignment="Left" Margin="31,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldBartenderTS_ValueChanged"/>
         <Label Content="Timescale:" HorizontalAlignment="Left" Margin="71,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblTimescaleValue_Copy" Content="1" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldTimescale_Copy1" HorizontalAlignment="Left" Margin="266,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" ValueChanged="sldTimescale_ValueChanged" TickFrequency="0.1" Value="1"/>
+        <Label x:Name="lblBartenderTSValue" Content="1" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sldWaiterTS" HorizontalAlignment="Left" Margin="266,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldWaiterTS_ValueChanged"/>
         <Label Content="Timescale:" HorizontalAlignment="Left" Margin="306,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblTimescaleValue_Copy1" Content="1" HorizontalAlignment="Left" Margin="370,33,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldTimescale_Copy2" HorizontalAlignment="Left" Margin="497,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" ValueChanged="sldTimescale_ValueChanged" TickFrequency="0.1" Value="1"/>
+        <Label x:Name="lblWaiterTSValue" Content="1" HorizontalAlignment="Left" Margin="370,33,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sldPatronsTS" HorizontalAlignment="Left" Margin="497,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldPatronsTS_ValueChanged"/>
         <Label Content="Timescale:" HorizontalAlignment="Left" Margin="537,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblTimescaleValue_Copy2" Content="1" HorizontalAlignment="Left" Margin="601,33,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblPatronsTSValue" Content="1" HorizontalAlignment="Left" Margin="601,33,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

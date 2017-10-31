@@ -26,11 +26,11 @@ namespace Lab6
                 Task t1 = Task.Run(() =>
                 {
                     Active = true;
-                    while (mw.Open || Patron.Amount > 0)
+                    while (mw.Open || Patron.Amount > 0 || mw.TableGlasses.Count > 0)
                     {
                         while (Paused) { Thread.Sleep(1); }
                         Log("Clearing tables.");
-                        for (int n = 0; n < 10 * 10 / mw.TimeScale; n++)
+                        for (int n = 0; n < 10 * 10 / (mw.TimeScale * mw.WaiterTS); n++)
                         {
                             while(Paused) { Thread.Sleep(1); }
                             Thread.Sleep(100);
@@ -41,7 +41,7 @@ namespace Lab6
                         if (GlassesFound < 1)
                         {
                             Log("Found 0 glasses.");
-                            for (int n = 0; n < 1 * 10 / mw.TimeScale; n++)
+                            for (int n = 0; n < 1 * 10 / (mw.TimeScale * mw.WaiterTS); n++)
                             {
                                 while (Paused) { Thread.Sleep(1); }
                                 Thread.Sleep(100);
@@ -50,7 +50,7 @@ namespace Lab6
                         else
                         {
                             Log($"Washing {GlassesFound} " + (GlassesFound == 1 ? "glass." : "glasses."));
-                            for (int n = 0; n < 15 * 10 / mw.TimeScale; n++)
+                            for (int n = 0; n < 15 * 10 / (mw.TimeScale * mw.WaiterTS); n++)
                             {
                                 while (Paused) { Thread.Sleep(1); }
                                 Thread.Sleep(100);
@@ -58,6 +58,7 @@ namespace Lab6
                             Log("Finished washing glasses.");
                             for (int n = 0; n < GlassesFound; n++)
                                 mw.Shelf.Push(new Glass());
+                            mw.UpdateGlassLbl();
                         }
                     }
                     Active = false;
