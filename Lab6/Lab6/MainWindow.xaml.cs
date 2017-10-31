@@ -130,15 +130,15 @@ namespace Lab6
                 if (Open)
                 {
                     sw.Restart();
-                    while(sw.ElapsedMilliseconds < 1000 / TimeScale) { }
+                    while (sw.ElapsedMilliseconds < 1000 / TimeScale) { }
 
                     ElapsedTime++;
-                    Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s)");
+                    Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s" + (AutoClose == 0 ? ")" : $" / {AutoClose}s)"));
 
                     if (AutoClose > 0 && ElapsedTime >= AutoClose)
                     {
                         Open = false;
-                        Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose})");
+                        Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose}s / {AutoClose}s)");
                     }
                 }
             }
@@ -166,7 +166,7 @@ namespace Lab6
         {
             bartender.Paused = true;
             waiter.Paused = true;
-            bouncer.Paused = true;           
+            bouncer.Paused = true;
             Dispatcher.Invoke(() =>
             {
                 lblBartender.Content = "Bartender (on break)";
