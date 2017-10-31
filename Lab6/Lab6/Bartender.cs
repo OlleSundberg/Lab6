@@ -10,7 +10,8 @@ namespace Lab6
     class Bartender
     {
         Patron CurrentCustomer;
-        bool Paused = false;
+        Glass glass;
+        public bool Paused = false;
 
         MainWindow mw;
         public Bartender(MainWindow mw)
@@ -27,7 +28,10 @@ namespace Lab6
                     Log("Waiting for a customer.");
                     while (!mw.BarQueue.TryDequeue(out CurrentCustomer) || Paused) { Thread.Sleep(1); }
                     Thread.Sleep(1000);
-                    while(Paused) { Thread.Sleep(1); }
+                    if (mw.Shelf.Count < 1)
+                        Log("Waiting for a glass.");
+                    while (!mw.Shelf.TryPop(out glass) || Paused) { Thread.Sleep(1); }
+                    mw.UpdateGlassLbl();
                     Log("Grabbing a glass from the shelf.");
                     Thread.Sleep(3000);
                     while (Paused) { Thread.Sleep(1); }
@@ -39,6 +43,6 @@ namespace Lab6
             });
         }
 
-        void Log(string Message) => mw.Dispatcher.Invoke(() => mw.lbxBartender.Items.Add($"{mw.MessageID++}: {Message}"));
+        void Log(string Message) => mw.Dispatcher.Invoke(() => mw.lbxBartender.Items.Insert(0, $"{mw.MessageID++}: {Message}"));        
     }
 }
