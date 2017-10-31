@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Lab6
@@ -16,10 +17,14 @@ namespace Lab6
 
         public void Work()
         {
-            while (true /*Baren är öppen och det finns gäster.*/)
+            Task t1 = Task.Run(() =>
             {
-
-            }
+                while (true /*Baren är öppen och det finns gäster.*/)
+                {
+                    Log("Waiting for a customer.");
+                    while (mw.BarQueue.Count < 1) { Thread.Sleep(1); }
+                }
+            });
         }
 
         void Log(string Message) => mw.Dispatcher.Invoke(() => mw.lbxBartender.Items.Add($"{mw.MessageID++}: {Message}"));
