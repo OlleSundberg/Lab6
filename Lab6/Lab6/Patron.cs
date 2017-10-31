@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab6
 {
-    class Patron
+    public class Patron
     {
         MainWindow mw;
         public Patron(MainWindow mw)
