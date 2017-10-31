@@ -10,6 +10,7 @@ namespace Lab6
     class Bartender
     {
         Patron CurrentCustomer;
+        bool Paused = false;
 
         MainWindow mw;
         public Bartender(MainWindow mw)
@@ -24,7 +25,16 @@ namespace Lab6
                 while (true /*Baren är öppen ELLER det finns gäster.*/)
                 {
                     Log("Waiting for a customer.");
-                    while (!mw.BarQueue.TryDequeue(out CurrentCustomer)) { Thread.Sleep(1); }
+                    while (!mw.BarQueue.TryDequeue(out CurrentCustomer) || Paused) { Thread.Sleep(1); }
+                    Thread.Sleep(1000);
+                    while(Paused) { Thread.Sleep(1); }
+                    Log("Grabbing a glass from the shelf.");
+                    Thread.Sleep(3000);
+                    while (Paused) { Thread.Sleep(1); }
+                    Log("Pouring up a beer for " + CurrentCustomer.Name);
+                    Thread.Sleep(3000);
+                    while (Paused) { Thread.Sleep(1); }
+                    CurrentCustomer.HasBeer = true;
                 }
             });
         }
