@@ -16,14 +16,24 @@ using System.Windows.Shapes;
 
 namespace Lab6
 {
+    public class Glass
+    {
+        public const int Total = 5;
+    }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        //settings:
+        public int Chairs = 4;
+
+
         public int MessageID = 1;        
 
         public ConcurrentQueue<Patron> BarQueue = new ConcurrentQueue<Patron>();
+        public ConcurrentQueue<Patron> ChairQueue = new ConcurrentQueue<Patron>();
+        public List<Patron> Sitting = new List<Patron>();
         public ConcurrentBag<Glass> Shelf = new ConcurrentBag<Glass>() { new Glass(), new Glass(), new Glass(), new Glass(), new Glass() };
 
         public MainWindow()
@@ -43,8 +53,4 @@ namespace Lab6
         }
     }
 
-    public class Glass
-    {
-        public const int Total = 5;
-    }
 }
