@@ -13,5 +13,15 @@ namespace Lab6
         {
             this.mw = mw;            
         }
+
+        public void Work()
+        {
+            while (true /*Baren är öppen och det finns gäster.*/)
+            {
+
+            }
+        }
+
+        void Log(string Message) => mw.Dispatcher.Invoke(() => mw.lbxBartender.Items.Add($"{mw.MessageID++}: {Message}"));
     }
 }
