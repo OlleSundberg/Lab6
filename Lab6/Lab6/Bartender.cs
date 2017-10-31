@@ -9,20 +9,22 @@ namespace Lab6
 {
     class Bartender
     {
+        Patron CurrentCustomer;
+
         MainWindow mw;
         public Bartender(MainWindow mw)
         {
-            this.mw = mw;            
+            this.mw = mw;
         }
 
         public void Work()
         {
             Task t1 = Task.Run(() =>
             {
-                while (true /*Baren är öppen och det finns gäster.*/)
+                while (true /*Baren är öppen ELLER det finns gäster.*/)
                 {
                     Log("Waiting for a customer.");
-                    while (mw.BarQueue.Count < 1) { Thread.Sleep(1); }
+                    while (mw.BarQueue.TryDequeue(out CurrentCustomer)) { Thread.Sleep(1); }
                 }
             });
         }
