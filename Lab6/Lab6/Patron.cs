@@ -10,6 +10,7 @@ namespace Lab6
     public class Patron
     {
         public static int Amount = 0;
+        static int SatisfiedCustomers = 0;
 
         MainWindow mw;
         public static MainWindow smw;
@@ -36,12 +37,17 @@ namespace Lab6
                 mw.ChairQueue.Enqueue(this);
                 while (!HasChair || Paused) { Thread.Sleep(1); }
                 Log(Name + " took a seat.");
-                Thread.Sleep(new Random().Next(10, 21) * 1000);
+                int delay = new Random().Next(10, 21);
+                for (int n = 0; n < delay * 10 / mw.TimeScale; n++)
+                    Thread.Sleep(100);
                 while (Paused) { Thread.Sleep(1); }
                 mw.Sitting[SeatID] = null;
+                mw.UpdateChairLbl();
                 Log(Name + " left the bar.");
                 Amount--;
+                mw.TableGlasses.Enqueue(new Glass());
                 mw.UpdatePatronLbl();
+                mw.Dispatcher.Invoke(() => mw.lblSatisfied.Content = "Satisfied customers: " + ++SatisfiedCustomers);
             });
         }
 
@@ -49,8 +55,6 @@ namespace Lab6
         public static void ChairHandler()
         {
             Patron CurrentPatron;
-            for (int n = 0; n < smw.Chairs; n++)
-                smw.Sitting.Add(null);
 
             Task t1 = Task.Run(() =>
             {
@@ -65,6 +69,7 @@ namespace Lab6
                             {
                                 CurrentPatron.HasChair = true;
                                 smw.Sitting[n] = CurrentPatron;
+                                smw.UpdateChairLbl();
                                 CurrentPatron.SeatID = n;
                                 Done = true;
                                 break;

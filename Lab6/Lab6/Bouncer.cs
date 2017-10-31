@@ -9,28 +9,41 @@ namespace Lab6
 {
     class Bouncer
     {
+        public bool Active = false;
+        public bool Paused = false;
         MainWindow mw;
         public Bouncer(MainWindow mw)
         {
             this.mw = mw;
 
-            Task t1 = Task.Run(() =>
+        }
+        public void Work()
+        {
+            if (!Active)
             {
-                while (true)
+                Task t1 = Task.Run(() =>
                 {
-                    if (mw.Open)
+                    Log("Bouncer starts working.");
+                    Active = true;
+                    while (mw.Open)
                     {
-                        Thread.Sleep(new Random().Next(mw.BouncerTimeMin, mw.BouncerTimeMax + 1) * 1000);
+                        while (Paused) { Thread.Sleep(1); }
+                        int delay = new Random().Next(mw.BouncerTimeMin, mw.BouncerTimeMax + 1);
+                        for (int n = 0; n < delay * 10 / mw.TimeScale; n++)
+                        {
+                            while(Paused) { Thread.Sleep(1); }
+                            Thread.Sleep(100);
+                        }
                         if (mw.Open)
                         {
                             mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
-                            mw.Dispatcher.Invoke(() => mw.Title += '!');
                         }
                     }
-                    else
-                        Thread.Sleep(1);
-                }
-            });
+                    Log("Bouncer is going home.");
+                    Active = false;
+                });
+            }
         }
+        void Log(string Message) => mw.Dispatcher.Invoke(()=>mw.lbxPatrons.Items.Insert(0,$"{mw.MessageID}: {Message}"));
     }
 }
