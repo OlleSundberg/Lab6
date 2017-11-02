@@ -5,35 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
-        Title="Bar [Closed]" Height="411.738" Width="877.436" ResizeMode="NoResize" Background="#FFCD6767">
+        Title="Bar [Closed]" Height="405.338" Width="930.236" ResizeMode="NoResize" Background="#FFCD6767" Icon="C:\Users\olle\Source\Repos\Lab6\Lab6\Lab6\BS.png">
     <Grid>
-        <Label x:Name="lblBartender" Content="Bartender" HorizontalAlignment="Left" Margin="8,10,0,0" VerticalAlignment="Top" FontSize="18" Width="218" Height="37"/>
-        <Label x:Name="lblWaiter" Content="Waiter" HorizontalAlignment="Left" Margin="237,10,0,0" VerticalAlignment="Top" FontSize="18" Width="219" Height="37"/>
-        <Label x:Name="lblPatrons" Content="Patrons" HorizontalAlignment="Left" Margin="467,10,0,0" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.291,0.403" Width="219" Height="37"/>
-        <ListBox x:Name="lbxBartender" HorizontalAlignment="Left" Height="201" Margin="8,83,0,0" VerticalAlignment="Top" Width="218"/>
-        <ListBox x:Name="lbxWaiter" HorizontalAlignment="Left" Height="201" Margin="237,83,0,0" VerticalAlignment="Top" Width="219"/>
-        <ListBox x:Name="lbxPatrons" HorizontalAlignment="Left" Height="201" Margin="467,83,0,0" VerticalAlignment="Top" Width="219"/>
-        <Button x:Name="btnPauseBartender" Content="Pause/Continue" HorizontalAlignment="Left" Margin="8,289,0,0" VerticalAlignment="Top" Width="218" Height="22" Click="btnPauseBartender_Click"/>
-        <Button x:Name="btnWaiterPause" Content="Pause/Continue" HorizontalAlignment="Left" Margin="237,289,0,0" VerticalAlignment="Top" Width="219" Height="22" Click="btnWaiterPause_Click"/>
-        <Button x:Name="btnPausePatrons" Content="Pause/Continue" HorizontalAlignment="Left" Margin="467,289,0,0" VerticalAlignment="Top" Width="219" Height="22" Click="btnPausePatrons_Click"/>
-        <Button x:Name="btnOpenBar" Content="Open/Close" HorizontalAlignment="Left" Margin="8,318,0,0" VerticalAlignment="Top" Width="678" Height="46" Click="btnOpenBar_Click"/>
-        <Button x:Name="btnPanic" Content="Panic! (stop all threads!!!)" HorizontalAlignment="Left" Margin="693,301,0,0" VerticalAlignment="Top" Width="165" Height="22" Click="btnPanic_Click"/>
-        <Label Content="Resources" HorizontalAlignment="Left" Margin="693,14,0,0" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.291,0.403" Width="105" Height="37"/>
-        <Label x:Name="lblNrOfPatrons" Content="NrOfGuests" HorizontalAlignment="Left" Margin="693,59,0,0" VerticalAlignment="Top" Height="29" Width="168"/>
-        <Label x:Name="lblNrOfGlasses" Content="NrOfGlasses" HorizontalAlignment="Left" Margin="693,94,0,0" VerticalAlignment="Top" Height="28" Width="168"/>
-        <Label x:Name="lblNrOfChairs" Content="NrOfChairs" HorizontalAlignment="Left" Margin="693,128,0,0" VerticalAlignment="Top" Cursor="" Height="50" Width="168"/>
-        <Slider x:Name="sldTimescale" HorizontalAlignment="Left" Margin="696,344,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" ValueChanged="sldTimescale_ValueChanged" TickFrequency="0.1" Value="1"/>
-        <Label Content="Global timescale:" HorizontalAlignment="Left" Margin="724,326,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblTimescaleValue" Content="1" HorizontalAlignment="Left" Margin="816,326,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblSatisfied" Content="Satisfied customers: 0" HorizontalAlignment="Left" Margin="693,202,0,0" VerticalAlignment="Top" FontSize="14"/>
-        <Slider x:Name="sldBartenderTS" HorizontalAlignment="Left" Margin="31,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldBartenderTS_ValueChanged"/>
-        <Label Content="Timescale:" HorizontalAlignment="Left" Margin="71,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblBartenderTSValue" Content="1" HorizontalAlignment="Left" Margin="135,33,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldWaiterTS" HorizontalAlignment="Left" Margin="266,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldWaiterTS_ValueChanged"/>
-        <Label Content="Timescale:" HorizontalAlignment="Left" Margin="306,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblWaiterTSValue" Content="1" HorizontalAlignment="Left" Margin="370,33,0,0" VerticalAlignment="Top"/>
-        <Slider x:Name="sldPatronsTS" HorizontalAlignment="Left" Margin="497,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldPatronsTS_ValueChanged"/>
-        <Label Content="Timescale:" HorizontalAlignment="Left" Margin="537,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
-        <Label x:Name="lblPatronsTSValue" Content="1" HorizontalAlignment="Left" Margin="601,33,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblBartender" Content="Bartender" HorizontalAlignment="Left" Margin="8,10,0,0" VerticalAlignment="Top" FontSize="18" Width="241" Height="37"/>
+        <Label x:Name="lblWaiter" Content="Waiter" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" FontSize="18" Width="219" Height="37"/>
+        <Label x:Name="lblPatrons" Content="Patrons" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.291,0.403" Width="244" Height="37"/>
+        <ListBox x:Name="lbxBartender" HorizontalAlignment="Left" Height="201" Margin="8,83,0,0" VerticalAlignment="Top" Width="241"/>
+        <ListBox x:Name="lbxWaiter" HorizontalAlignment="Left" Height="201" Margin="260,83,0,0" VerticalAlignment="Top" Width="219"/>
+        <ListBox x:Name="lbxPatrons" HorizontalAlignment="Left" Height="201" Margin="490,83,0,0" VerticalAlignment="Top" Width="244"/>
+        <Button x:Name="btnPauseBartender" Content="Pause/Continue" HorizontalAlignment="Left" Margin="8,289,0,0" VerticalAlignment="Top" Width="241" Height="22" Click="btnPauseBartender_Click"/>
+        <Button x:Name="btnWaiterPause" Content="Pause/Continue" HorizontalAlignment="Left" Margin="260,289,0,0" VerticalAlignment="Top" Width="219" Height="22" Click="btnWaiterPause_Click"/>
+        <Button x:Name="btnPausePatrons" Content="Pause/Continue" HorizontalAlignment="Left" Margin="490,289,0,0" VerticalAlignment="Top" Width="244" Height="22" Click="btnPausePatrons_Click"/>
+        <Button x:Name="btnOpenBar" Content="Open/Close" HorizontalAlignment="Left" Margin="8,318,0,0" VerticalAlignment="Top" Width="726" Height="46" Click="btnOpenBar_Click"/>
+        <Button x:Name="btnPanic" Content="Panic! (stop all threads!!!)" HorizontalAlignment="Left" Margin="749,288,0,0" VerticalAlignment="Top" Width="165" Height="22" Click="btnPanic_Click"/>
+        <Label Content="Resources" HorizontalAlignment="Left" Margin="746,13,0,0" VerticalAlignment="Top" FontSize="18" RenderTransformOrigin="-0.291,0.403" Width="105" Height="37"/>
+        <Label x:Name="lblNrOfPatrons" Content="NrOfGuests" HorizontalAlignment="Left" Margin="746,58,0,0" VerticalAlignment="Top" Height="29" Width="168"/>
+        <Label x:Name="lblNrOfGlasses" Content="NrOfGlasses" HorizontalAlignment="Left" Margin="746,93,0,0" VerticalAlignment="Top" Height="28" Width="168"/>
+        <Label x:Name="lblNrOfChairs" Content="NrOfChairs" HorizontalAlignment="Left" Margin="746,127,0,0" VerticalAlignment="Top" Cursor="" Height="50" Width="168"/>
+        <Slider x:Name="sldTimescale" HorizontalAlignment="Left" Margin="749,322,0,0" VerticalAlignment="Top" Width="165" Maximum="5" IsSnapToTickEnabled="True" Height="20" ValueChanged="sldTimescale_ValueChanged" TickFrequency="0.1" Value="1"/>
+        <Label Content="Global timescale:" HorizontalAlignment="Left" Margin="777,304,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
+        <Label x:Name="lblTimescaleValue" Content="1" HorizontalAlignment="Left" Margin="869,304,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblSatisfied" Content="Satisfied customers: 0" HorizontalAlignment="Left" Margin="746,172,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Slider x:Name="sldBartenderTS" HorizontalAlignment="Left" Margin="33,51,0,0" VerticalAlignment="Top" Width="183" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldBartenderTS_ValueChanged"/>
+        <Label Content="Timescale:" HorizontalAlignment="Left" Margin="78,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521" Width="71"/>
+        <Label x:Name="lblBartenderTSValue" Content="1" HorizontalAlignment="Left" Margin="149,33,0,0" VerticalAlignment="Top" Width="17"/>
+        <Slider x:Name="sldWaiterTS" HorizontalAlignment="Left" Margin="289,51,0,0" VerticalAlignment="Top" Width="165" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldWaiterTS_ValueChanged"/>
+        <Label Content="Timescale:" HorizontalAlignment="Left" Margin="329,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521"/>
+        <Label x:Name="lblWaiterTSValue" Content="1" HorizontalAlignment="Left" Margin="393,33,0,0" VerticalAlignment="Top"/>
+        <Slider x:Name="sldPatronsTS" HorizontalAlignment="Left" Margin="523,51,0,0" VerticalAlignment="Top" Width="184" Maximum="5" Minimum="0.1" IsSnapToTickEnabled="True" Height="20" TickFrequency="0.1" Value="1" ValueChanged="sldPatronsTS_ValueChanged"/>
+        <Label Content="Timescale:" HorizontalAlignment="Left" Margin="568,33,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.528,0.521" Width="71"/>
+        <Label x:Name="lblPatronsTSValue" Content="1" HorizontalAlignment="Left" Margin="639,33,0,0" VerticalAlignment="Top" Width="18"/>
+        <Button x:Name="btnSettings" Content="Settings" HorizontalAlignment="Left" Margin="749,345,0,0" VerticalAlignment="Top" Width="165" Cursor="Arrow" Click="btnSettings_Click"/>
+        <Label x:Name="lblLastRating" Content="Last rating: 0" HorizontalAlignment="Left" Margin="749,201,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblAverageRating" Content="Average rating: 0" HorizontalAlignment="Left" Margin="749,227,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>
