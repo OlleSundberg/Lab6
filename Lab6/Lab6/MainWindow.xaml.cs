@@ -21,7 +21,7 @@ namespace Lab6
 {
     public class Glass
     {
-        public const int Total = 8;
+        public const int Total = 9;
     }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -37,11 +37,11 @@ namespace Lab6
 
         public int Groups = 1; //Mängd människor som kommer in i taget.
 
-        public int Chairs = 9;
+        public int Chairs = 8;
         public int BouncerTimeMin = 3;
         public int BouncerTimeMax = 10;
 
-        int AutoClose = 120; //0 = disabled
+        int AutoClose = 0; //0 = disabled
 
         public bool Open = false;
 
@@ -83,6 +83,12 @@ namespace Lab6
             Patron.smw = this;
             Patron.ChairHandler();
 
+            List<Patron> pat = new List<Patron>();
+            for (int n = 0; n < 15; n++)
+            {
+                pat.Add(new Patron(this, "hello"));
+            }
+
             Task t1 = Task.Run(() => Timer());
         }
 
@@ -105,8 +111,8 @@ namespace Lab6
                 Title = "Bar [Closed]";
         }
 
-        public void UpdateGlassLbl() => Dispatcher.Invoke(() => lblNrOfGlasses.Content = $"There " + (Shelf.Count == 1 ? "is" : "are") + $" {Shelf.Count} " + (Shelf.Count == 1 ? "glass." : "glasses.") + $" ({Glass.Total} total)");
-        public void UpdatePatronLbl() => Dispatcher.Invoke(() => lblNrOfPatrons.Content = $"There " + (Patron.Amount == 1 ? "is" : "are") + $" {Patron.Amount} " + (Patron.Amount == 1 ? "guest." : "guests."));
+        public void UpdateGlassLbl() => Dispatcher.Invoke(() => lblNrOfGlasses.Content = "There " + (Shelf.Count == 1 ? "is" : "are") + $" {Shelf.Count} " + (Shelf.Count == 1 ? "glass." : "glasses.") + $" ({Glass.Total} total)");
+        public void UpdatePatronLbl() => Dispatcher.Invoke(() => lblNrOfPatrons.Content = "There " + (Patron.Amount == 1 ? "is" : "are") + $" {Patron.Amount} " + (Patron.Amount == 1 ? "guest." : "guests."));
         public void UpdateChairLbl()
         {
             int FreeChairs = 0;
@@ -135,12 +141,16 @@ namespace Lab6
                     ElapsedTime++;
                     Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s" + (AutoClose == 0 ? ")" : $" / {AutoClose}s)"));
 
+                    if (ElapsedTime == 5)
+                        bouncer.PartyBus(0);
+
                     if (AutoClose > 0 && ElapsedTime >= AutoClose)
                     {
                         Open = false;
                         Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose}s / {AutoClose}s)");
                     }
                 }
+                else { Thread.Sleep(1); }
             }
         }
 

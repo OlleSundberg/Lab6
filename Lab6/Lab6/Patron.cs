@@ -38,7 +38,7 @@ namespace Lab6
                     Thread.Sleep(100);
                 mw.ChairQueue.Enqueue(this);
                 while (!HasChair || Paused) { Thread.Sleep(1); }
-                Log("Found a seat.");
+                Log(Name + " found a seat.");
                 for (int n = 0; n < 2 * 10 / (mw.TimeScale * mw.PatronTS); n++)
                     Thread.Sleep(100);
                 Log(Name + " took a seat.");

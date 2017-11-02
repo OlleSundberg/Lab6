@@ -47,10 +47,11 @@ namespace Lab6
         }
         void Log(string Message) => mw.Dispatcher.Invoke(()=>mw.lbxPatrons.Items.Insert(0,$"{mw.MessageID++}: {Message}"));
 
+
         public void PartyBus(int Amount)
         {
             for (int n = 0; n < Amount; n++)
-                Task.Run(() => mw.BarQueue.Enqueue(new Patron(mw, mw.GetName())));
+                mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
         }
     }
 }

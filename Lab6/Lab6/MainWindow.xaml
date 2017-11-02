@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
-        Title="Bar [Closed]" Height="411.738" Width="877.436" ResizeMode="NoResize">
+        Title="Bar [Closed]" Height="411.738" Width="877.436" ResizeMode="NoResize" Background="#FFCD6767">
     <Grid>
         <Label x:Name="lblBartender" Content="Bartender" HorizontalAlignment="Left" Margin="8,10,0,0" VerticalAlignment="Top" FontSize="18" Width="218" Height="37"/>
         <Label x:Name="lblWaiter" Content="Waiter" HorizontalAlignment="Left" Margin="237,10,0,0" VerticalAlignment="Top" FontSize="18" Width="219" Height="37"/>
