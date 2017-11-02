@@ -14,11 +14,18 @@ namespace Lab6
         public bool Active = false;
         MainWindow mw;
 
-        public Waiter(MainWindow mw)
+        /// <summary>
+        /// Create an instance of Waiter
+        /// </summary>
+        /// <param name="mainWindow">The mainwindow class. Ex: Create Bartender in MainWindow.xaml.cs and use "this" as the parameter.</param>
+        public Waiter(MainWindow mainWindow)
         {
-            this.mw = mw;            
+            mw = mainWindow;            
         }
 
+        /// <summary>
+        /// Activates the waiter, causing him to work until it's closed, all customers are left and all the dishes have been done.
+        /// </summary>
         public void Work()
         {
             if (!Active)

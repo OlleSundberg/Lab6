@@ -12,11 +12,19 @@ namespace Lab6
         public bool Active = false;
         public bool Paused = false;
         MainWindow mw;
-        public Bouncer(MainWindow mw)
-        {
-            this.mw = mw;
 
+        /// <summary>
+        /// Create an instance of Bouncer
+        /// </summary>
+        /// <param name="mainWindow">The mainwindow class. Ex: Create Bartender in MainWindow.xaml.cs and use "this" as the parameter.</param>
+        public Bouncer(MainWindow mainWindow)
+        {
+            mw = mainWindow;
         }
+
+        /// <summary>
+        /// Activates the bouncer, causing him to work until it's closed.
+        /// </summary>
         public void Work()
         {
             if (!Active)
@@ -47,7 +55,10 @@ namespace Lab6
         }
         void Log(string Message) => mw.Dispatcher.Invoke(()=>mw.lbxPatrons.Items.Insert(0,$"{mw.MessageID++}: {Message}"));
 
-
+        /// <summary>
+        /// Makes an amount of people appear instantly.
+        /// </summary>
+        /// <param name="Amount">The amount of people that appears.</param>
         public void PartyBus(int Amount)
         {
             for (int n = 0; n < Amount; n++)
@@ -57,6 +68,9 @@ namespace Lab6
         }
 
         Random rnd = new Random();
+        /// <summary>
+        /// Makes a random amount of people appear instantly.
+        /// </summary>
         public void PartyBus()
         {
             int Amount = rnd.Next(5, 31);

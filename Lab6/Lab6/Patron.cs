@@ -22,15 +22,19 @@ namespace Lab6
 
         public string Name;
 
-        public Patron(MainWindow mw, string Name)
+        /// <summary>
+        /// Create an instance of Patron
+        /// </summary>
+        /// <param name="mainWindow">The mainwindow class. Ex: Create Bartender in MainWindow.xaml.cs and use "this" as the parameter.</param>
+        public Patron(MainWindow mainWindow, string Name)
         {
-            this.mw = mw;
+            mw = mainWindow;
 
             Task t1 = Task.Run(() =>
             {
                 this.Name = Name;
                 Amount++;
-                mw.UpdatePatronLbl();
+                mainWindow.UpdatePatronLbl();
                 Log(Name + " entered the bar.");                
                 Thread LifeThread = new Thread(Exist);
                 LifeThread.Start();
@@ -62,7 +66,9 @@ namespace Lab6
             mw.Dispatcher.Invoke(() => mw.lblSatisfied.Content = "Satisfied customers: " + ++SatisfiedCustomers);
         }
 
-
+        /// <summary>
+        /// Needs to be run once for patrons to be able to find chairs.
+        /// </summary>
         public static void ChairHandler()
         {
             Patron CurrentPatron;

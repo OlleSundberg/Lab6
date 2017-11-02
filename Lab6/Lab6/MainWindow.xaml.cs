@@ -75,15 +75,13 @@ namespace Lab6
             UpdatePatronLbl();
             UpdateGlassLbl();
             UpdateChairLbl();
-
+            
             bartender = new Bartender(this);
             bouncer = new Bouncer(this);
             waiter = new Waiter(this);
 
             Patron.smw = this;
             Patron.ChairHandler();
-
-            List<Patron> pat = new List<Patron>();
 
             Task t1 = Task.Run(() => Timer());
         }
