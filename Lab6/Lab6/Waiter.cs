@@ -30,6 +30,7 @@ namespace Lab6
         {
             if (!Active)
             {
+                mw.btnSettings.IsEnabled = false;
                 Task t1 = Task.Run(() =>
                 {
                     Active = true;
@@ -70,6 +71,7 @@ namespace Lab6
                     }
                     Active = false;
                     Log("Going home.");
+                    mw.Dispatcher.Invoke(()=>mw.btnSettings.IsEnabled = true);
                 });
             }
         }

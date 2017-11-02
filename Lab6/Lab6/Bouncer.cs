@@ -39,7 +39,7 @@ namespace Lab6
                         int delay = new Random().Next(mw.BouncerTimeMin, mw.BouncerTimeMax + 1);
                         for (int n = 0; n < delay * 10 / (mw.TimeScale * mw.BouncerTS); n++)
                         {
-                            while(Paused) { Thread.Sleep(1); }
+                            while (Paused) { Thread.Sleep(1); }
                             Thread.Sleep(100);
                         }
                         if (mw.Open)
@@ -53,7 +53,7 @@ namespace Lab6
                 });
             }
         }
-        void Log(string Message) => mw.Dispatcher.Invoke(()=>mw.lbxPatrons.Items.Insert(0,$"{mw.MessageID++}: {Message}"));
+        void Log(string Message) => mw.Dispatcher.Invoke(() => mw.lbxPatrons.Items.Insert(0, $"{mw.MessageID++}: {Message}"));
 
         /// <summary>
         /// Makes an amount of people appear instantly.
@@ -64,7 +64,7 @@ namespace Lab6
             for (int n = 0; n < Amount; n++)
                 mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
             Thread.Sleep(1000);
-            Log($"A bus full of {Amount} people arrived");
+            Log(Amount == 0 ? "An empty bus arrived" : $"A bus full of {Amount} " + (Amount == 1 ? "person" : "people") + " arrived");
         }
 
         Random rnd = new Random();
@@ -73,13 +73,13 @@ namespace Lab6
         /// </summary>
         public void PartyBus()
         {
-            int Amount = rnd.Next(5, 13);
+            int Amount = rnd.Next(mw.MinPeopleInBus, mw.MaxPeopleInBus + 1);
             for (int n = 0; n < Amount; n++)
                 mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
             Task.Run(() =>
             {
                 Thread.Sleep(1500);
-                Log($"A bus full of {Amount} people arrived");
+                Log(Amount == 0 ? "An empty bus arrived" : $"A bus full of {Amount} " + (Amount == 1 ? "person" : "people") + " arrived");
             });
         }
     }

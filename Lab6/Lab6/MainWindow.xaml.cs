@@ -21,27 +21,37 @@ namespace Lab6
 {
     public class Glass
     {
-        public const int Total = 9;
+        public static int Total = 9;
     }
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        //settings:
+        #region Settings:
+        Settings settings;
+        #region Changeable in main window:
         public double TimeScale = 1;
         public double BartenderTS = 1;
         public double WaiterTS = 1;
         public double BouncerTS = 1;
         public double PatronTS = 1;
+        #endregion
 
+        #region Changeable in settings:
         public int Groups = 1; //Mängd människor som kommer in i taget.
-
         public int Chairs = 8;
+        public int AutoClose = 0; //0 = disabled
+        public bool PartyBusEnabled = false;
+        public int MaxTimeScale = 5;
+        public int MinPeopleInBus = 5;
+        public int MaxPeopleInBus = 12;
+        public double ChanceOfBus = 1.66;
+        #endregion
+        #endregion
+
         public int BouncerTimeMin = 3;
         public int BouncerTimeMax = 10;
-
-        int AutoClose = 120; //0 = disabled
 
         public bool Open = false;
 
@@ -75,7 +85,7 @@ namespace Lab6
             UpdatePatronLbl();
             UpdateGlassLbl();
             UpdateChairLbl();
-            
+
             bartender = new Bartender(this);
             bouncer = new Bouncer(this);
             waiter = new Waiter(this);
@@ -99,10 +109,7 @@ namespace Lab6
                 bartender.Work();
                 waiter.Work();
                 bouncer.Work();
-                Title = "Bar [Open]";
             }
-            else
-                Title = "Bar [Closed]";
         }
 
         public void UpdateGlassLbl() => Dispatcher.Invoke(() => lblNrOfGlasses.Content = "There " + (Shelf.Count == 1 ? "is" : "are") + $" {Shelf.Count} " + (Shelf.Count == 1 ? "glass." : "glasses.") + $" ({Glass.Total} total)");
@@ -120,23 +127,24 @@ namespace Lab6
             });
         }
 
-
+        public int ElapsedTime = 0;
         void Timer()
         {
             Stopwatch sw = new Stopwatch();
-            int ElapsedTime = 0;
+
             while (true)
             {
                 if (Open)
                 {
                     sw.Restart();
-                    while (sw.ElapsedMilliseconds < 1000 / TimeScale) { }
-
+                    while (sw.ElapsedMilliseconds < 995 / TimeScale) { Thread.Sleep(1); }
                     ElapsedTime++;
+
                     Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s" + (AutoClose == 0 ? ")" : $" / {AutoClose}s)"));
 
-                    if (new Random().Next(1, 61) == 1)
-                        bouncer.PartyBus();
+                    if (PartyBusEnabled)
+                        if (new Random().Next(1, Convert.ToInt32(100 / ChanceOfBus)) == 1)
+                            bouncer.PartyBus();
 
                     if (AutoClose > 0 && ElapsedTime >= AutoClose)
                     {
@@ -144,13 +152,22 @@ namespace Lab6
                         Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose}s / {AutoClose}s) [+0]");
                     }
                 }
+                else if (AutoClose == 0 && waiter.Active)
+                {
+                    sw.Restart();
+                    while (sw.ElapsedMilliseconds < 995 / TimeScale) { Thread.Sleep(1); }
+                    ElapsedTime++;
+
+                    Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s)");
+                }
+
                 else
                 {
                     if (ElapsedTime >= AutoClose && waiter.Active)
                     {
 
                         sw.Restart();
-                        while (sw.ElapsedMilliseconds < 1000 / TimeScale) { }
+                        while (sw.ElapsedMilliseconds < 995 / TimeScale) { Thread.Sleep(1); }
 
                         ElapsedTime++;
 
@@ -218,6 +235,12 @@ namespace Lab6
             BouncerTS = sldPatronsTS.Value;
             if (lblPatronsTSValue != null)
                 lblPatronsTSValue.Content = BouncerTS.ToString();
+        }
+
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            settings = new Settings(this);
+            settings.ShowDialog();
         }
     }
 }

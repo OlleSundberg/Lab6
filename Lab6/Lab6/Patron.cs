@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -19,6 +20,9 @@ namespace Lab6
         public bool HasBeer = false;
         public bool HasChair = false;
         int SeatID;
+        bool Served = false;
+        static int ratings = 0;
+        static int score = 0;
 
         public string Name;
 
@@ -35,7 +39,7 @@ namespace Lab6
                 this.Name = Name;
                 Amount++;
                 mainWindow.UpdatePatronLbl();
-                Log(Name + " entered the bar.");                
+                Log(Name + " entered the bar.");
                 Thread LifeThread = new Thread(Exist);
                 LifeThread.Start();
             });
@@ -43,6 +47,7 @@ namespace Lab6
 
         void Exist()
         {
+            Task.Run(() => Satisfaction());
             while (!HasBeer || Paused) { Thread.Sleep(1); }
             Log(Name + " is looking for a chair.");
             for (int n = 0; n < 1 * 10 / (mw.TimeScale * mw.PatronTS); n++)
@@ -53,6 +58,7 @@ namespace Lab6
             for (int n = 0; n < 2 * 10 / (mw.TimeScale * mw.PatronTS); n++)
                 Thread.Sleep(100);
             Log(Name + " took a seat.");
+            Served = true;
             int delay = new Random().Next(10, 21);
             for (int n = 0; n < delay * 10 / (mw.TimeScale * mw.PatronTS); n++)
                 Thread.Sleep(100);
@@ -64,6 +70,29 @@ namespace Lab6
             mw.TableGlasses.Enqueue(new Glass());
             mw.UpdatePatronLbl();
             mw.Dispatcher.Invoke(() => mw.lblSatisfied.Content = "Satisfied customers: " + ++SatisfiedCustomers);
+        }
+
+        void Satisfaction()
+        {
+            int TimeArrived = mw.ElapsedTime;
+            Log(Name + " started his/her stopwatch.");
+            while (!Served) { Thread.Sleep(1); }
+            int TimeDone = mw.ElapsedTime;
+            int TimeSpent = TimeDone - TimeArrived;
+            Log(Name + " had to wait for a total of " + TimeSpent + " seconds");
+            int myscore = 110 - TimeSpent;
+            score += myscore > 0 ? myscore : 0;
+            ratings++;
+            mw.Dispatcher.Invoke(() =>
+            {
+                mw.lblLastRating.Content = "Last rating: " + myscore;
+                mw.lblAverageRating.Content = "Average rating: " + score / ratings + $"({ratings})";
+            });
+        }
+
+        static double GetScore()
+        {
+            return score / ratings;
         }
 
         /// <summary>

@@ -1,0 +1,44 @@
+﻿<Window x:Class="Lab6.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab6"
+        mc:Ignorable="d"
+        Title="Settings" Height="198.7" Width="300" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="btnClose" Content="ʇᴉxǝ puɐ ǝʌɐs" HorizontalAlignment="Left" Margin="87,140,0,0" VerticalAlignment="Top" Width="197" Height="19" Click="btnClose_Click" RenderTransformOrigin="0.5,0.5">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-180"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+        </Button>
+        <CheckBox x:Name="cbxAdvanced" Content="Advanced" HorizontalAlignment="Left" Margin="10,142,0,0" VerticalAlignment="Top" Click="cbxAdvanced_Click"/>
+        <Label Content="Glasses" HorizontalAlignment="Left" Margin="42,5,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxGlasses" HorizontalAlignment="Left" Height="23" Margin="10,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" TextChanged="tbxGlasses_TextChanged"/>
+        <Label Content="Chairs" HorizontalAlignment="Left" Margin="197,5,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxChairs" HorizontalAlignment="Left" Height="23" Margin="150,31,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="134" TextChanged="tbxChairs_TextChanged"/>
+        <Label Content="Max Timescale:" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxTimescale" HorizontalAlignment="Left" Height="23" Margin="105,61,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="47" IsEnabled="False"/>
+        <Label Content="AutoClose:" HorizontalAlignment="Left" Margin="157,58,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.965,-0.083"/>
+        <TextBox x:Name="tbxAutoclose" HorizontalAlignment="Left" Height="23" Margin="224,61,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" TextChanged="tbxAutoclose_TextChanged"/>
+        <Button x:Name="btnResetTime" Content="Reset timer" HorizontalAlignment="Left" Margin="224,91,0,0" VerticalAlignment="Top" Width="60" Click="btnResetTime_Click"/>
+        <CheckBox x:Name="cbxPartyBus" Content="PartyBus" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top" Click="cbxPartyBus_Click"/>
+        <Label Content="People:" HorizontalAlignment="Left" Margin="81,85,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxMinPeople" HorizontalAlignment="Left" Height="23" Margin="129,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" IsEnabled="False" TextChanged="tbxMinPeople_TextChanged"/>
+        <Label Content="-" HorizontalAlignment="Left" Margin="165,85,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxMaxPeople" HorizontalAlignment="Left" Height="23" Margin="179,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" IsEnabled="False" TextChanged="tbxMaxPeople_TextChanged"/>
+        <Label Content="Chance for PartyBus per second:" HorizontalAlignment="Left" Margin="10,111,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="tbxChanceOfBus" HorizontalAlignment="Left" Height="23" Margin="191,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="39" IsEnabled="False" TextChanged="tbxChanceOfBus_TextChanged"/>
+        <Label Content="%" HorizontalAlignment="Left" Margin="226,112,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.792,0.292"/>
+
+    </Grid>
+</Window>
