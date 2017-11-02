@@ -41,7 +41,7 @@ namespace Lab6
         public int BouncerTimeMin = 3;
         public int BouncerTimeMax = 10;
 
-        int AutoClose = 0; //0 = disabled
+        int AutoClose = 120; //0 = disabled
 
         public bool Open = false;
 
@@ -84,10 +84,6 @@ namespace Lab6
             Patron.ChairHandler();
 
             List<Patron> pat = new List<Patron>();
-            for (int n = 0; n < 15; n++)
-            {
-                pat.Add(new Patron(this, "hello"));
-            }
 
             Task t1 = Task.Run(() => Timer());
         }
@@ -141,16 +137,29 @@ namespace Lab6
                     ElapsedTime++;
                     Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s" + (AutoClose == 0 ? ")" : $" / {AutoClose}s)"));
 
-                    if (ElapsedTime == 5)
-                        bouncer.PartyBus(0);
+                    if (new Random().Next(1, 61) == 1)
+                        bouncer.PartyBus();
 
                     if (AutoClose > 0 && ElapsedTime >= AutoClose)
                     {
                         Open = false;
-                        Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose}s / {AutoClose}s)");
+                        Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose}s / {AutoClose}s) [+0]");
                     }
                 }
-                else { Thread.Sleep(1); }
+                else
+                {
+                    if (ElapsedTime >= AutoClose && waiter.Active)
+                    {
+
+                        sw.Restart();
+                        while (sw.ElapsedMilliseconds < 1000 / TimeScale) { }
+
+                        ElapsedTime++;
+
+                        Dispatcher.Invoke(() => Title = $"Bar [Closed] ({AutoClose}s / {AutoClose}s) [+{ElapsedTime - AutoClose}]");
+                    }
+                    else { Thread.Sleep(1); }
+                }
             }
         }
 

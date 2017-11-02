@@ -31,29 +31,35 @@ namespace Lab6
                 this.Name = Name;
                 Amount++;
                 mw.UpdatePatronLbl();
-                Log(Name + " entered the bar.");
-                while (!HasBeer || Paused) { Thread.Sleep(1); }
-                Log(Name + " is looking for a chair.");
-                for (int n = 0; n < 1 * 10 / (mw.TimeScale * mw.PatronTS); n++)
-                    Thread.Sleep(100);
-                mw.ChairQueue.Enqueue(this);
-                while (!HasChair || Paused) { Thread.Sleep(1); }
-                Log(Name + " found a seat.");
-                for (int n = 0; n < 2 * 10 / (mw.TimeScale * mw.PatronTS); n++)
-                    Thread.Sleep(100);
-                Log(Name + " took a seat.");
-                int delay = new Random().Next(10, 21);
-                for (int n = 0; n < delay * 10 / (mw.TimeScale * mw.PatronTS); n++)
-                    Thread.Sleep(100);
-                while (Paused) { Thread.Sleep(1); }
-                mw.Sitting[SeatID] = null;
-                mw.UpdateChairLbl();
-                Log(Name + " left the bar.");
-                Amount--;
-                mw.TableGlasses.Enqueue(new Glass());
-                mw.UpdatePatronLbl();
-                mw.Dispatcher.Invoke(() => mw.lblSatisfied.Content = "Satisfied customers: " + ++SatisfiedCustomers);
+                Log(Name + " entered the bar.");                
+                Thread LifeThread = new Thread(Exist);
+                LifeThread.Start();
             });
+        }
+
+        void Exist()
+        {
+            while (!HasBeer || Paused) { Thread.Sleep(1); }
+            Log(Name + " is looking for a chair.");
+            for (int n = 0; n < 1 * 10 / (mw.TimeScale * mw.PatronTS); n++)
+                Thread.Sleep(100);
+            mw.ChairQueue.Enqueue(this);
+            while (!HasChair || Paused) { Thread.Sleep(1); }
+            Log(Name + " found a seat.");
+            for (int n = 0; n < 2 * 10 / (mw.TimeScale * mw.PatronTS); n++)
+                Thread.Sleep(100);
+            Log(Name + " took a seat.");
+            int delay = new Random().Next(10, 21);
+            for (int n = 0; n < delay * 10 / (mw.TimeScale * mw.PatronTS); n++)
+                Thread.Sleep(100);
+            while (Paused) { Thread.Sleep(1); }
+            mw.Sitting[SeatID] = null;
+            mw.UpdateChairLbl();
+            Log(Name + " left the bar.");
+            Amount--;
+            mw.TableGlasses.Enqueue(new Glass());
+            mw.UpdatePatronLbl();
+            mw.Dispatcher.Invoke(() => mw.lblSatisfied.Content = "Satisfied customers: " + ++SatisfiedCustomers);
         }
 
 

@@ -52,6 +52,21 @@ namespace Lab6
         {
             for (int n = 0; n < Amount; n++)
                 mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
+            Thread.Sleep(1000);
+            Log($"A bus full of {Amount} people arrived");
+        }
+
+        Random rnd = new Random();
+        public void PartyBus()
+        {
+            int Amount = rnd.Next(5, 31);
+            for (int n = 0; n < Amount; n++)
+                mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
+            Task.Run(() =>
+            {
+                Thread.Sleep(1500);
+                Log($"A bus full of {Amount} people arrived");
+            });
         }
     }
 }
