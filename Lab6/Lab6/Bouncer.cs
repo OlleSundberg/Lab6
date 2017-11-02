@@ -69,11 +69,11 @@ namespace Lab6
 
         Random rnd = new Random();
         /// <summary>
-        /// Makes a random amount of people appear instantly.
+        /// Makes a random amount of people appear instantly. (5-12 people)
         /// </summary>
         public void PartyBus()
         {
-            int Amount = rnd.Next(5, 31);
+            int Amount = rnd.Next(5, 13);
             for (int n = 0; n < Amount; n++)
                 mw.BarQueue.Enqueue(new Patron(mw, mw.GetName()));
             Task.Run(() =>
