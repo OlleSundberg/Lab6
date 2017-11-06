@@ -38,7 +38,7 @@ namespace Lab6
             tbxMinPeople.Text = mw.MinPeopleInBus.ToString();
             tbxMaxPeople.Text = mw.MaxPeopleInBus.ToString();
             tbxChanceOfBus.Text = mw.ChanceOfBus.ToString();
-            tbxAutoclose.Text = mw.AutoClose.ToString();            
+            tbxAutoclose.Text = mw.AutoClose.ToString();
             if (AdvancedSettings)
                 EnableAdvanced();
             if (mw.PartyBusEnabled)
@@ -91,8 +91,11 @@ namespace Lab6
             if (!int.TryParse(tbxAutoclose.Text, out mw.AutoClose))
                 MessageBox.Show("Couldn't save AutoClose properly. Make sure it's only numbers.", "Error");
 
-            if (!double.TryParse(tbxChanceOfBus.Text, out mw.ChanceOfBus))
+            double BusChance; ;
+            if (!double.TryParse(tbxChanceOfBus.Text, out BusChance))
                 MessageBox.Show("Couldn't save ChanceOfBus properly. Make sure it's only numbers. Try replacing '.'s with ','s and vice versa.", "Error");
+            else
+                mw.ChanceOfBus = BusChance > 100 ? 100 : BusChance > 0 ? BusChance : 0.01;
 
             if (!int.TryParse(tbxMinPeople.Text, out mw.MinPeopleInBus))
                 MessageBox.Show("Couldn't save MinPeopleInBus properly. Make sure it's only numbers.", "Error");

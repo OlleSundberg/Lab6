@@ -153,7 +153,7 @@ namespace Lab6
 
                     Dispatcher.Invoke(() => Title = (Open ? "Bar [Open] " : "Bar [Closed] ") + $"({ElapsedTime}s" + (AutoClose == 0 ? ")" : $" / {AutoClose}s)"));
 
-                    if (PartyBusEnabled)
+                    if (PartyBusEnabled && ChanceOfBus > 0)
                         if (new Random().Next(1, Convert.ToInt32(100 / ChanceOfBus)) == 1)
                             bouncer.PartyBus();
 
