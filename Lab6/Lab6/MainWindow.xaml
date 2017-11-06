@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab6"
         mc:Ignorable="d"
-        Title="Bar [Closed]" Height="405.338" Width="930.236" ResizeMode="NoResize" Background="#FFCD6767" Icon="C:\Users\olle\Source\Repos\Lab6\Lab6\Lab6\BS.png">
+        Title="Bar [Closed]" Height="405.338" Width="930.236" ResizeMode="NoResize" Background="#FFCD6767">
     <Grid>
         <Label x:Name="lblBartender" Content="Bartender" HorizontalAlignment="Left" Margin="8,10,0,0" VerticalAlignment="Top" FontSize="18" Width="241" Height="37"/>
         <Label x:Name="lblWaiter" Content="Waiter" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top" FontSize="18" Width="219" Height="37"/>

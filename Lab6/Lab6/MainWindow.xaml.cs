@@ -73,6 +73,17 @@ namespace Lab6
         {
             InitializeComponent();
 
+            string Path = AppDomain.CurrentDomain.BaseDirectory + "BS.png";
+
+            try
+            {
+                Icon = new BitmapImage(new Uri(Path));
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("Unable to load the icon.\r\nCouldn't find " + Path);
+            }
+
             for (int n = 0; n < Chairs; n++)
                 Sitting.Add(null);
 
@@ -94,38 +105,38 @@ namespace Lab6
             Patron.ChairHandler();
 
             Task t1 = Task.Run(() => Timer());
-        }
+            }
 
         public string GetName()
-        {
-            return NameList.Names[rnd.Next(NameList.Names.Count)];
-        }
-
-        private void btnOpenBar_Click(object sender, RoutedEventArgs e)
-        {
-            Open = !Open;
-            if (Open)
             {
-                bartender.Work();
-                waiter.Work();
-                bouncer.Work();
+                return NameList.Names[rnd.Next(NameList.Names.Count)];
             }
-        }
 
-        public void UpdateGlassLbl() => Dispatcher.Invoke(() => lblNrOfGlasses.Content = "There " + (Shelf.Count == 1 ? "is" : "are") + $" {Shelf.Count} " + (Shelf.Count == 1 ? "glass." : "glasses.") + $" ({Glass.Total} total)");
-        public void UpdatePatronLbl() => Dispatcher.Invoke(() => lblNrOfPatrons.Content = "There " + (Patron.Amount == 1 ? "is" : "are") + $" {Patron.Amount} " + (Patron.Amount == 1 ? "guest." : "guests."));
-        public void UpdateChairLbl()
-        {
-            int FreeChairs = 0;
-            for (int n = 0; n < Chairs; n++)
-                if (Sitting[n] == null)
-                    FreeChairs++;
-
-            Dispatcher.Invoke(() =>
+            private void btnOpenBar_Click(object sender, RoutedEventArgs e)
             {
-                lblNrOfChairs.Content = $"There " + (FreeChairs == 1 ? "is" : "are") + $" {FreeChairs} empty " + (FreeChairs == 1 ? "chair." : "chairs.") + $"\n({Chairs} total)";
-            });
-        }
+                Open = !Open;
+                if (Open)
+                {
+                    bartender.Work();
+                    waiter.Work();
+                    bouncer.Work();
+                }
+            }
+
+            public void UpdateGlassLbl() => Dispatcher.Invoke(() => lblNrOfGlasses.Content = "There " + (Shelf.Count == 1 ? "is" : "are") + $" {Shelf.Count} " + (Shelf.Count == 1 ? "glass." : "glasses.") + $" ({Glass.Total} total)");
+            public void UpdatePatronLbl() => Dispatcher.Invoke(() => lblNrOfPatrons.Content = "There " + (Patron.Amount == 1 ? "is" : "are") + $" {Patron.Amount} " + (Patron.Amount == 1 ? "guest." : "guests."));
+            public void UpdateChairLbl()
+            {
+                int FreeChairs = 0;
+                for (int n = 0; n < Chairs; n++)
+                    if (Sitting[n] == null)
+                        FreeChairs++;
+
+                Dispatcher.Invoke(() =>
+                {
+                    lblNrOfChairs.Content = $"There " + (FreeChairs == 1 ? "is" : "are") + $" {FreeChairs} empty " + (FreeChairs == 1 ? "chair." : "chairs.") + $"\n({Chairs} total)";
+                });
+            }
 
         public int ElapsedTime = 0;
         void Timer()
