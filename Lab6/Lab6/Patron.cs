@@ -80,12 +80,13 @@ namespace Lab6
             int TimeDone = mw.ElapsedTime;
             int TimeSpent = TimeDone - TimeArrived;
             Log(Name + " had to wait for a total of " + TimeSpent + " seconds");
-            int myscore = 110 - TimeSpent;
+            int myscore = 110 - TimeSpent >= 0 ? 110 - TimeSpent : 0;
             score += myscore > 0 ? myscore : 0;
             ratings++;
             mw.Dispatcher.Invoke(() =>
             {
                 mw.lblLastRating.Content = "Last rating: " + myscore;
+                mw.lblEmotion.Content = GetEmotion(myscore);
                 mw.lblAverageRating.Content = "Average rating: " + score / ratings + $"({ratings})";
             });
         }
@@ -93,6 +94,27 @@ namespace Lab6
         static double GetScore()
         {
             return score / ratings;
+        }
+
+        string GetEmotion(int myscore)
+        {
+            string emotion;
+            if (myscore >= 100)
+                emotion = ":D";
+            else if (myscore > 80)
+                emotion = ":>";
+            else if (myscore > 60)
+                emotion = ":)";
+            else if (myscore > 40)
+                emotion = ":|";
+            else if (myscore > 20)
+                emotion = ":S";
+            else if (myscore > 0)
+                emotion = ":(";
+            else
+                emotion = ">:0";
+
+            return emotion;
         }
 
         /// <summary>

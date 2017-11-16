@@ -96,6 +96,7 @@ namespace Lab6
             UpdatePatronLbl();
             UpdateGlassLbl();
             UpdateChairLbl();
+            lblEmotion.Content = "";
 
             bartender = new Bartender(this);
             bouncer = new Bouncer(this);

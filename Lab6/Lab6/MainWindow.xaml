@@ -38,5 +38,15 @@
         <Button x:Name="btnSettings" Content="Settings" HorizontalAlignment="Left" Margin="749,345,0,0" VerticalAlignment="Top" Width="165" Cursor="Arrow" Click="btnSettings_Click"/>
         <Label x:Name="lblLastRating" Content="Last rating: 0" HorizontalAlignment="Left" Margin="749,201,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblAverageRating" Content="Average rating: 0" HorizontalAlignment="Left" Margin="749,227,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblEmotion" Content="emote" HorizontalAlignment="Left" Margin="834,195,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontSize="20">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+        </Label>
     </Grid>
 </Window>
